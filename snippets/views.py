@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from snippets.models import usertable
+from snippets.models import usertable 
 from snippets.serializers import usertableSerializer
 
 class JSONResponse(HttpResponse):
@@ -41,7 +41,7 @@ def snippet_detail(request, pk):
     try:
         snippet = usertable.objects.get(pk=pk)
     except snippet.DoesNotExist:
-        return HttpResponse(status=404)
+            return HttpResponse(status=404)
 
     if request.method == 'GET':
         serializer = usertableSerializer(snippet)
