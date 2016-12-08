@@ -40,7 +40,7 @@ def snippet_detail(request, pk):
     """
     try:
         snippet = usertable.objects.get(pk=pk)
-    except usertable.DoesNotExist:
+    except snippet.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':

@@ -11,17 +11,21 @@ class usertable(models.Model):
     username = models.CharField(max_length=250, blank=False)
     password = models.CharField(max_length=100, blank=True)
     email =  models.CharField(max_length=250, blank=False)
+    class Meta:
+        ordering = ('created',)
     
 class AppGroup(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     groupcreateId=models.IntegerField(default=0, blank=True, null=True)
     groupuserId= models.IntegerField(default=0, blank=True, null=True)
     groupName=models.CharField(max_length=250, blank=True)
-    
+    class Meta:
+        ordering = ('created',)
 class Trans(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     groupId = models.IntegerField(default=0, blank=True, null=True)
     tansName = models.CharField(max_length=250, blank=True)
     transuserId = models.IntegerField(default=0, blank=True, null=True)
     transamount = models.CharField(max_length=250, blank=True)
-    
+    class Meta:
+        ordering = ('created',)
