@@ -1,1 +1,1 @@
-web: gunicorn mobile_app_dev.wsgi --log-file -
+web: gunicorn snippets.wsgi --log-file -
