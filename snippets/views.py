@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from snippets.models import usertable 
+from snippets.models import usertable
+from snippets.models import Snippet
 from snippets.serializers import usertableSerializer
+from snippets.serializers import SnippetSerializer
+from rest_framework import generics
 
 class JSONResponse(HttpResponse):
     """
@@ -58,3 +61,24 @@ def snippet_detail(request, pk):
     elif request.method == 'DELETE':
         snippet.delete()
         return HttpResponse(status=204)
+        
+@csrf_exempt
+def snippet_llist(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return JSONResponse(serializer.data)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JSONResponse(serializer.data, status=201)
+        return JSONResponse(serializer.errors, status=400)
+        
+        
+
