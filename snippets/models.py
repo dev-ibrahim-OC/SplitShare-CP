@@ -8,7 +8,7 @@ STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 class usertable(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    username = models.CharField(max_length=250, blank=False)
+    username = models.TextField()
     password = models.CharField(max_length=100, blank=True)
     email =  models.CharField(max_length=250, blank=False)
     linenos = models.BooleanField(default=False)
